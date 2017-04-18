@@ -1,6 +1,6 @@
 {
   "name": "@bossmodecg/module-twitch",
-  "version": "0.0.20",
+  "version": "0.0.21",
   "description": "BossmodeCG server-side support for Twitch chat connections.",
   "license": "MIT",
   "bugs": {
