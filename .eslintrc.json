@@ -1,0 +1,22 @@
+{
+  "extends": [
+    "airbnb"
+  ],
+
+  "plugins": [
+  ],
+
+  "env": {
+    "node": true,
+    "jest": true
+  },
+
+  "rules": {
+    "arrow-parens": [ "error", "always" ],
+    "comma-dangle": [ "error", "never" ],
+    "max-len": [ "warn", 120 ],
+    "no-console": "off",
+    "no-underscore-dangle": "off",
+    "quotes": "off"
+  }
+}
