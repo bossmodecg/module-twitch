@@ -1,6 +1,6 @@
 {
   "name": "@bossmodecg/module-twitch",
-  "version": "0.0.21",
+  "version": "0.1.0",
   "description": "BossmodeCG server-side support for Twitch chat connections.",
   "license": "MIT",
   "bugs": {
@@ -20,7 +20,7 @@
     "tmi.js": "^1.1.2"
   },
   "peerDependencies": {
-    "@bossmodecg/core": "^0.0.20"
+    "@bossmodecg/core": "^0.1.0"
   },
   "devDependencies": {
     "babel-cli": "^6.24.0",
