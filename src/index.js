@@ -1,4 +1,4 @@
-import BossmodeCG from '@bossmodecg/core';
+import Module from '@bossmodecg/module';
 
 import TwitchAPI from 'node-twitch-api';
 import { client as TMIClient } from 'tmi.js';
@@ -24,21 +24,25 @@ const TWITCH_SCOPE =
   "channel_read channel_editor channel_commercial " +
   "channel_subscriptions chat_login channel_feed_read channel_feed_edit";
 
-export default class TwitchModule extends BossmodeCG.BModule {
+export default class TwitchModule extends Module {
   constructor(config) {
-    super("twitch", _.merge({}, DEFAULT_CONFIG, config));
+    super("twitch", config);
 
     this._configureTmi = this._configureTmi.bind(this);
     this._configureTwitchApi = this._configureTwitchApi.bind(this);
 
     this._twitchFollowers = new Set();
     this._newFollowers = [];
+
+    this.on("internal.registerServer", async (server) => {
+      await this._configureTwitchApi();
+      await this._configureTmi(server);
+    });
   }
 
-  async _doRegister(server) {
-    await this._configureTwitchApi();
-    await this._configureTmi(server);
-  }
+  /* eslint-disable class-methods-use-this */
+  get defaultConfig() { return DEFAULT_CONFIG; }
+  /* eslint-enable class-methods-use-this */
 
   async _configureTwitchApi() {
     const config = this.config;
@@ -54,11 +58,11 @@ export default class TwitchModule extends BossmodeCG.BModule {
   }
 
   async _configureTmi(server) {
-    const config = this.config;
+    const config = _.cloneDeep(this.config);
+    config.channels = [config.channel];
+
     const logger = this.logger;
-
     const tmiTwitch = new TMIClient(config);
-
 
     // TODO: poll periodically for new followers; spread out new follower notifications
     tmiTwitch.on("connecting", () => {

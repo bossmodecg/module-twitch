@@ -1,26 +1,22 @@
 {
   "name": "@bossmodecg/module-twitch",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "BossmodeCG server-side support for Twitch chat connections.",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/bossmodecg/module-twitch/issues"
   },
   "repository": "github:bossmodecg/module-twitch",
+  "main": "dist",
   "files": [
     "dist"
   ],
-  "bossmodecg": {
-    "modulePath": "dist/index"
-  },
   "dependencies": {
+    "@bossmodecg/module": "^0.2.0",
     "axios": "^0.15.3",
     "lodash": "^4.17.4",
     "node-twitch-api": "^0.1.2",
     "tmi.js": "^1.1.2"
-  },
-  "peerDependencies": {
-    "@bossmodecg/core": "^0.1.0"
   },
   "devDependencies": {
     "babel-cli": "^6.24.0",
@@ -40,6 +36,7 @@
   "scripts": {
     "test": "eslint src && jest --coverage",
     "build": "babel src -d dist",
+    "watch": "babel --watch src -d dist",
     "prepublish": "npm run build",
     "precommit": "npm run test",
     "prepush": "npm run test"
